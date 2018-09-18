@@ -1,0 +1,3 @@
+binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json" "3.10.7"
+binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json" "1.7.11"
+git "ssh://git@bitbucket.rccl.com:7999/mob/excalibur-ios-foundation-lib-logging.git" "11e63a1e755ce5b4a95c93dc09789999080082b8"

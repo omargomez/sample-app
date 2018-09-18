@@ -24,6 +24,10 @@
 		79A680BD20BDF23A00FFD075 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A680BC20BDF23A00FFD075 /* Entities.swift */; };
 		79CAB64820D182BB005502EC /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAB64720D182BB005502EC /* Date+Extensions.swift */; };
 		79F50FE420D9566D0019709C /* MainMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F50FE320D9566D0019709C /* MainMovieCell.swift */; };
+		F970C7C621505FA100468AA0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F970C7C321505FA100468AA0 /* Crashlytics.framework */; };
+		F970C7C721505FA100468AA0 /* FoundationLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F970C7C421505FA100468AA0 /* FoundationLogging.framework */; };
+		F970C7C821505FA100468AA0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F970C7C521505FA100468AA0 /* Fabric.framework */; };
+		F970C7CD2150678D00468AA0 /* UIViewController+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F970C7CC2150678D00468AA0 /* UIViewController+Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		79A680BC20BDF23A00FFD075 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		79CAB64720D182BB005502EC /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		79F50FE320D9566D0019709C /* MainMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieCell.swift; sourceTree = "<group>"; };
+		F970C7C321505FA100468AA0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		F970C7C421505FA100468AA0 /* FoundationLogging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationLogging.framework; path = Carthage/Build/iOS/FoundationLogging.framework; sourceTree = SOURCE_ROOT; };
+		F970C7C521505FA100468AA0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = SOURCE_ROOT; };
+		F970C7CC2150678D00468AA0 /* UIViewController+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Log.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +61,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F970C7C621505FA100468AA0 /* Crashlytics.framework in Frameworks */,
+				F970C7C721505FA100468AA0 /* FoundationLogging.framework in Frameworks */,
+				F970C7C821505FA100468AA0 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +73,7 @@
 		792FF4B820B5F4D200AA470C = {
 			isa = PBXGroup;
 			children = (
+				F970C7C221505F4400468AA0 /* Dependencies */,
 				795AFB6E20B86E190075BD06 /* Extensions */,
 				792FF4C320B5F4D200AA470C /* AtomicApp */,
 				792FF4C220B5F4D200AA470C /* Products */,
@@ -104,8 +116,19 @@
 				795AFB6F20B86E400075BD06 /* URLSession+Extensions.swift */,
 				7900F6C320D025C00007AF38 /* NSError+Extensions.swift */,
 				79CAB64720D182BB005502EC /* Date+Extensions.swift */,
+				F970C7CC2150678D00468AA0 /* UIViewController+Log.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F970C7C221505F4400468AA0 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				F970C7C321505FA100468AA0 /* Crashlytics.framework */,
+				F970C7C521505FA100468AA0 /* Fabric.framework */,
+				F970C7C421505FA100468AA0 /* FoundationLogging.framework */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +141,7 @@
 				792FF4BD20B5F4D200AA470C /* Sources */,
 				792FF4BE20B5F4D200AA470C /* Frameworks */,
 				792FF4BF20B5F4D200AA470C /* Resources */,
+				F970C7C921505FCB00468AA0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -175,6 +199,25 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F970C7C921505FCB00468AA0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Crashlytics.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Fabric.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FoundationLogging.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		792FF4BD20B5F4D200AA470C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -183,6 +226,7 @@
 				79A680BD20BDF23A00FFD075 /* Entities.swift in Sources */,
 				79A133B020BC39DE005C61F6 /* MovieDBGenres.swift in Sources */,
 				79F50FE420D9566D0019709C /* MainMovieCell.swift in Sources */,
+				F970C7CD2150678D00468AA0 /* UIViewController+Log.swift in Sources */,
 				792FF4C720B5F4D200AA470C /* ViewController.swift in Sources */,
 				7946DFD920D99A6D0010FE91 /* Requests.swift in Sources */,
 				79A133AE20BB5BEA005C61F6 /* MovieDBConfig.swift in Sources */,
@@ -331,6 +375,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = AtomicApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.omargomez.AtomicApp;
@@ -345,6 +393,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = AtomicApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.omargomez.AtomicApp;

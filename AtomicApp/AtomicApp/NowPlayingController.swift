@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FoundationLogging
 
 class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -35,13 +36,12 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error)")
                     return
                 }
                 
-                print("[CONF] config: \(theData.description)")
+                self.info("[CONF] config: \(theData.description)")
                 configuration = Configuration(fromJson: theData)
-                print("[CONF] app config: \(configuration)")
+                self.info("[CONF] app config: \(String(describing: configuration))")
             }
         }
         
@@ -55,10 +55,10 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
             
             guard let theData = data,
                 let results = theData["results"] as? [Any] else {
-                    print("Error starting App!!! \(error)")
+                    self.error("Error starting App!!! \(String(describing: error))")
                     return
             }
-            print("[CONF] nor playing: \(theData.description)")
+            self.info("[CONF] nor playing: \(theData.description)")
 
             for case let movieJson as [String:Any] in results {
                 
@@ -106,7 +106,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
 
             strongSelf.movies = theMovies
 
-            print("Data Loaded!!!")
+            strongSelf.info("Data Loaded!!!")
 
             strongSelf.playingTable.isHidden = false
             strongSelf.statusLabel.isHidden = true
@@ -164,5 +164,4 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
 
-    
 }

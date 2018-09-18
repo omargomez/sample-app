@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FoundationLogging
+
 class MovieDBGenres
 {
     public static let shared = MovieDBGenres()
@@ -21,7 +23,7 @@ class MovieDBGenres
             DispatchQueue.main.async { [unowned self] in
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error)")
+                    Log.error(error: error ?? NSError.UNKNOWN)
                     return
                 }
 
@@ -44,7 +46,7 @@ class MovieDBGenres
                     self.genreMap[genreId] = genreName
                 }
 
-                print("[GENRES]: \(self.genreMap.description)")
+                Log.info(message: "[GENRES]: \(self.genreMap.description)")
                 
             }
             

@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import FoundationLogging
 
 enum EndPoint {
     
     static let baseURL = "https://api.themoviedb.org"
     static let apiKey = "1e7e61e962607b1d22d9908e764ff14e"
     static let version = 3
-    
+
     case nowPlaying
     case configuration
     case genres
@@ -35,7 +36,7 @@ enum EndPoint {
             return URL(string: String(format: "%@/%d/movie/%@?&api_key=%@", EndPoint.baseURL, EndPoint.version, movieId, EndPoint.apiKey))!
         case .credits(let movieId):
             let str = String(format: "%@/%d/movie/%@/credits?&api_key=%@", EndPoint.baseURL, EndPoint.version, movieId, EndPoint.apiKey)
-            print("Credits url: \(str)")
+            Log.info(message: "Credits url: \(str)")
             return URL(string: String(format: "%@/%d/movie/%@/credits?&api_key=%@", EndPoint.baseURL, EndPoint.version, movieId, EndPoint.apiKey))!
         }
     }

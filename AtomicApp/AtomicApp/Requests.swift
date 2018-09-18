@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FoundationLogging
 
 class Request {
     
@@ -24,10 +25,10 @@ class Request {
                 return
             }
             
-            debugPrint(theData)
+            Log.info(message: String(describing: theData))
             let respType = self.endpoint.responseType
             let response = respType.init(fromJson: theData)
-            debugPrint(response)
+            Log.info(message: String(describing: response))
             
             completion(response, error)
             

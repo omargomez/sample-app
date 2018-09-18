@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FoundationLogging
 
 class MovieDetailController: UIViewController {
 
@@ -76,13 +77,13 @@ class MovieDetailController: UIViewController {
             }
             
             guard let theData = data else {
-                debugPrint(error ?? NSError.UNKNOWN)
+                Log.error(error: error ?? NSError.UNKNOWN)
                 return
             }
             
-            debugPrint(theData)
+            Log.info(message: String(describing: theData))
             detail = MovieDetail(fromJson: theData)
-            debugPrint(detail)
+            Log.info(message: String(describing: detail))
             
 
         }
@@ -96,13 +97,13 @@ class MovieDetailController: UIViewController {
             }
             
             guard let theData = data else {
-                debugPrint(error ?? NSError.UNKNOWN)
+                Log.error(error: error ?? NSError.UNKNOWN)
                 return
             }
 
-            debugPrint(theData)
+            Log.info(message: String(describing: theData))
             crew = Crew(fromJson: theData)
-            debugPrint(crew)
+            Log.info(message: String(describing: crew))
 
         }
         
@@ -146,7 +147,7 @@ class MovieDetailController: UIViewController {
     private func loadPoster(forPath path: String, completion: @escaping (UIImage?) -> Void ) {
         
         let imageEndPoint = EndPoint.image(basePath: self.config.images.secureBaseUrl, size: self.config.images.defaultPosterSize, imageName: path)
-        debugPrint(imageEndPoint.url)
+        Log.info(message: String(describing: imageEndPoint.url))
         URLSession.shared.doImageTask(fromURL: imageEndPoint.url) { (image, error) in
             
             DispatchQueue.main.async {

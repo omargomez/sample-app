@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FoundationLogging
 
 class MainMovieCell: UITableViewCell {
 
@@ -25,7 +26,7 @@ class MainMovieCell: UITableViewCell {
 
     func scheduleImageLoading(fromURL url: URL) {
         
-        print("Loading image from \(url)")
+        Log.info(message: "Loading image from \(url)")
         var task: URLSessionTask?
         task = URLSession.shared.createImageTask(fromURL: url) { [weak self] (image, error) in
             
@@ -34,7 +35,7 @@ class MainMovieCell: UITableViewCell {
             }
             
             guard let theImage = image else {
-                print("Error loading image: \(error ?? NSError.UNKNOWN)")
+                Log.error(error: error ?? NSError.UNKNOWN)
                 return
             }
             
@@ -42,7 +43,7 @@ class MainMovieCell: UITableViewCell {
                 
                 guard let currentTask = strongSelf.imageTask,
                     task == currentTask else {
-                        print("Too old!!!")
+                        Log.info(message: "Too old!!!")
                         return
                 }
                 
@@ -50,7 +51,7 @@ class MainMovieCell: UITableViewCell {
                 strongSelf.imageView?.image = theImage
                 strongSelf.imageTask = nil
                 strongSelf.setNeedsLayout()
-                print("Loaded image from \(url)")
+                Log.info(message: "Loaded image from \(url)")
 
             }
             
@@ -65,7 +66,7 @@ class MainMovieCell: UITableViewCell {
         
         if let task = self.imageTask {
             if task.state == .running {
-                print("Cancelling task for ...")
+                Log.info(message: "Cancelling task for ...")
                 task.cancel()
             }
         }

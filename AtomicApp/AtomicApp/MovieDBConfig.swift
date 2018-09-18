@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FoundationLogging
 
 class MovieDBConfig
 {
@@ -26,14 +27,14 @@ class MovieDBConfig
             DispatchQueue.main.async { [unowned self] in
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error)")
+                    Log.error(error: error ?? NSError.UNKNOWN)
                     return
                 }
                 
                 self.configDict = theData
                 self.configured = true
                 
-                print("[CONF]: \(theData.description)")
+                Log.info(message: "[CONF]: \(theData.description)")
 
             }
     
