@@ -35,13 +35,13 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error)")
+                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
                     return
                 }
                 
                 print("[CONF] config: \(theData.description)")
                 configuration = Configuration(fromJson: theData)
-                print("[CONF] app config: \(configuration)")
+                print("[CONF] app config: \(configuration!)")
             }
         }
         
@@ -55,7 +55,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
             
             guard let theData = data,
                 let results = theData["results"] as? [Any] else {
-                    print("Error starting App!!! \(error)")
+                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
                     return
             }
             print("[CONF] nor playing: \(theData.description)")

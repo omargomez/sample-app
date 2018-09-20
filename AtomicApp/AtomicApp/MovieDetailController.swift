@@ -82,9 +82,7 @@ class MovieDetailController: UIViewController {
             
             debugPrint(theData)
             detail = MovieDetail(fromJson: theData)
-            debugPrint(detail)
-            
-
+            debugPrint(detail!)
         }
         
         group.enter()
@@ -102,7 +100,7 @@ class MovieDetailController: UIViewController {
 
             debugPrint(theData)
             crew = Crew(fromJson: theData)
-            debugPrint(crew)
+            debugPrint(crew!)
 
         }
         

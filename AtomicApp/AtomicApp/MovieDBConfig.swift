@@ -26,7 +26,7 @@ class MovieDBConfig
             DispatchQueue.main.async { [unowned self] in
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error)")
+                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
                     return
                 }
                 

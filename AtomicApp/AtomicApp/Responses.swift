@@ -15,7 +15,4 @@ class Response {
 }
 
 class NowPlayingResponse: Response {
-    
-    
-    
 }
