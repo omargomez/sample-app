@@ -40,32 +40,5 @@ enum EndPoint {
         }
     }
 
-    var requestType: Request.Type {
-        switch self {
-        case .nowPlaying:
-            return NowPlayingRequest.self
-        default:
-            return Request.self
-        }
-    }
-    
-    var responseType: Response.Type {
-        switch self {
-            case .nowPlaying:
-                return NowPlayingResponse.self
-            case .credits:
-                return Response.self
-            default:
-                return Response.self
-        }
-    }
-    
-    var request: Request {
-        
-        let reqType = self.requestType
-        return reqType.init(self)
-
-    }
-
 }
 
