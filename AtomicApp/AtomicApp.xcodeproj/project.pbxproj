@@ -21,6 +21,7 @@
 		79A680BD20BDF23A00FFD075 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A680BC20BDF23A00FFD075 /* Entities.swift */; };
 		79CAB64820D182BB005502EC /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAB64720D182BB005502EC /* Date+Extensions.swift */; };
 		79F50FE420D9566D0019709C /* MainMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F50FE320D9566D0019709C /* MainMovieCell.swift */; };
+		F9D2C836215578EE001576E4 /* Logging .swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D2C835215578EE001576E4 /* Logging .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		79A680BC20BDF23A00FFD075 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		79CAB64720D182BB005502EC /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		79F50FE320D9566D0019709C /* MainMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieCell.swift; sourceTree = "<group>"; };
+		F9D2C835215578EE001576E4 /* Logging .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logging .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		792FF4B820B5F4D200AA470C = {
 			isa = PBXGroup;
 			children = (
+				F9D2C83421557876001576E4 /* MiniFrameworks */,
 				795AFB6E20B86E190075BD06 /* Extensions */,
 				792FF4C320B5F4D200AA470C /* AtomicApp */,
 				792FF4C220B5F4D200AA470C /* Products */,
@@ -97,6 +100,14 @@
 				79CAB64720D182BB005502EC /* Date+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F9D2C83421557876001576E4 /* MiniFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9D2C835215578EE001576E4 /* Logging .swift */,
+			);
+			path = MiniFrameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D2C836215578EE001576E4 /* Logging .swift in Sources */,
 				79A680BD20BDF23A00FFD075 /* Entities.swift in Sources */,
 				79A133B020BC39DE005C61F6 /* MovieDBGenres.swift in Sources */,
 				79F50FE420D9566D0019709C /* MainMovieCell.swift in Sources */,

@@ -35,13 +35,13 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
+                    LogLevel.ERROR.logMessage("Error starting App!!!", error ?? NSError.UNKNOWN)
                     return
                 }
                 
-                print("[CONF] config: \(theData.description)")
+                LogLevel.INFO.logMessage("[CONF] config: \(theData.description)")
                 configuration = Configuration(fromJson: theData)
-                print("[CONF] app config: \(configuration!)")
+                LogLevel.INFO.logMessage("[CONF] app config: \(configuration!)")
             }
         }
         
@@ -55,10 +55,10 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
             
             guard let theData = data,
                 let results = theData["results"] as? [Any] else {
-                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
+                    LogLevel.ERROR.logMessage("Error starting App!!!", error ?? NSError.UNKNOWN)
                     return
             }
-            print("[CONF] nor playing: \(theData.description)")
+            LogLevel.INFO.logMessage("[CONF] now playing: \(theData.description)")
 
             for case let movieJson as [String:Any] in results {
                 
@@ -106,7 +106,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
 
             strongSelf.movies = theMovies
 
-            print("Data Loaded!!!")
+            LogLevel.INFO.logMessage("Data Loaded!!!")
 
             strongSelf.playingTable.isHidden = false
             strongSelf.statusLabel.isHidden = true

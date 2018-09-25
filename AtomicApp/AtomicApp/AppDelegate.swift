@@ -49,3 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension LogLevel {
+    
+    func appDefaultLevel() -> LogLevel {
+        return .DEBUG
+    }
+    
+}
+
