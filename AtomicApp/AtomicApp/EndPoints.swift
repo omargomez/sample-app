@@ -35,7 +35,7 @@ enum EndPoint {
             return URL(string: String(format: "%@/%d/movie/%@?&api_key=%@", EndPoint.baseURL, EndPoint.version, movieId, EndPoint.apiKey))!
         case .credits(let movieId):
             let str = String(format: "%@/%d/movie/%@/credits?&api_key=%@", EndPoint.baseURL, EndPoint.version, movieId, EndPoint.apiKey)
-            print("Credits url: \(str)")
+            Logger.shared.debug("Credits url: \(str)")
             return URL(string: String(format: "%@/%d/movie/%@/credits?&api_key=%@", EndPoint.baseURL, EndPoint.version, movieId, EndPoint.apiKey))!
         }
     }

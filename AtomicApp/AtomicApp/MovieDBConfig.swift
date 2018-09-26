@@ -26,14 +26,14 @@ class MovieDBConfig
             DispatchQueue.main.async { [unowned self] in
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
+                    Logger.shared.error("Error starting App!!!", error ?? NSError.UNKNOWN)
                     return
                 }
                 
                 self.configDict = theData
                 self.configured = true
                 
-                print("[CONF]: \(theData.description)")
+                Logger.shared.error("Configuration loaded!: \(theData.description)")
 
             }
     

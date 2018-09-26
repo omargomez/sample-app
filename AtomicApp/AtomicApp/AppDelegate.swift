@@ -49,10 +49,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-extension LogLevel {
+extension Logger {
     
-    func appDefaultLevel() -> LogLevel {
+    func appDefaultLevel() -> Logger.Level {
         return .DEBUG
+    }
+    
+    func prefix(_ level: Logger.Level) -> String {
+
+        let levelEmo: String = {
+            switch level {
+            case .DEBUG:
+                return "🔎"
+            case .INFO:
+                return "ℹ️"
+            case .WARN:
+                return "⚠️"
+            case .ERROR:
+                return "💣"
+            case .CRITICAL:
+                return "💥"
+            }
+        }()
+        
+        return "\(levelEmo) \(Date().timeIntervalSince1970)"
     }
     
 }

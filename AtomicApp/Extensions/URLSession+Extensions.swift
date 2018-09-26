@@ -26,7 +26,7 @@ extension URLSession {
         let task = URLSession.shared.dataTask(with: endpoint) {(data, response, error ) in
             
             guard error == nil else {
-                print("returned error")
+                Logger.shared.error("returned error")
                 completion(nil, error)
                 return
             }
@@ -54,7 +54,7 @@ extension URLSession {
         let task = URLSession.shared.dataTask(with: imageURL) {(data, response, error ) in
             
             guard error == nil else {
-                print("returned error")
+                Logger.shared.error("returned error")
                 completion(nil, error)
                 return
             }

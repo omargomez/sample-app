@@ -21,7 +21,7 @@ class MovieDBGenres
             DispatchQueue.main.async { [unowned self] in
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
+                    Logger.shared.error("Error starting App!!! ", error ?? NSError.UNKNOWN)
                     return
                 }
 
@@ -44,8 +44,7 @@ class MovieDBGenres
                     self.genreMap[genreId] = genreName
                 }
 
-                print("[GENRES]: \(self.genreMap.description)")
-                
+                Logger.shared.error("Genres loaded!: \(self.genreMap.description)")
             }
             
         }
