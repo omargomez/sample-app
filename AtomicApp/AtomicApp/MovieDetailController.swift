@@ -80,9 +80,9 @@ class MovieDetailController: UIViewController {
                 return
             }
             
-            debugPrint(theData)
+            Logger.shared.debug(theData)
             detail = MovieDetail(fromJson: theData)
-            debugPrint(detail!)
+            Logger.shared.debug(detail!)
         }
         
         group.enter()

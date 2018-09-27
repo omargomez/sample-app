@@ -33,7 +33,7 @@ class MovieDBConfig
                 self.configDict = theData
                 self.configured = true
                 
-                Logger.shared.error("Configuration loaded!: \(theData.description)")
+                Logger.shared.info("Configuration was loaded!")
 
             }
     

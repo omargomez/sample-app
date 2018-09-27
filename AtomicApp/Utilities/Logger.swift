@@ -1,5 +1,5 @@
 //
-//  Logging .swift
+//  Logger .swift
 //  AtomicApp
 //
 //  Created by Omar Eduardo Gomez Padilla on 9/21/18.

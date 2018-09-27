@@ -44,7 +44,7 @@ class MovieDBGenres
                     self.genreMap[genreId] = genreName
                 }
 
-                Logger.shared.error("Genres loaded!: \(self.genreMap.description)")
+                Logger.shared.info("Genres was loaded!")
             }
             
         }

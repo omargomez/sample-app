@@ -39,9 +39,9 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                     return
                 }
                 
-                Logger.shared.log(.INFO, "[CONF] config: \(theData.description)")
+                Logger.shared.log(.DEBUG, "[CONF] config: \(theData.description)")
                 configuration = Configuration(fromJson: theData)
-                Logger.shared.log(.INFO, "[CONF] app config: \(configuration!)")
+                Logger.shared.log(.DEBUG, "[CONF] app config: \(configuration!)")
             }
         }
         
@@ -58,7 +58,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                     Logger.shared.log(.ERROR, "Error starting App!!!", error ?? NSError.UNKNOWN)
                     return
             }
-            Logger.shared.log(.INFO, "[CONF] now playing: \(theData.description)")
+            Logger.shared.log(.DEBUG, "[CONF] now playing: \(theData.description)")
 
             for case let movieJson as [String:Any] in results {
                 
@@ -106,7 +106,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
 
             strongSelf.movies = theMovies
 
-            Logger.shared.log(.INFO, "Data Loaded!!!")
+            Logger.shared.log(.DEBUG, "Data Loaded!!!")
 
             strongSelf.playingTable.isHidden = false
             strongSelf.statusLabel.isHidden = true
