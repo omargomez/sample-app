@@ -35,13 +35,19 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 guard let theData = data else {
-                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
+                    Logger.nowPlaying.log(.ERROR, "Error starting App!!!", error ?? NSError.UNKNOWN)
                     return
                 }
                 
-                print("[CONF] config: \(theData.description)")
+                Logger.nowPlaying.log(.DEBUG, "[CONF] config: \(theData.description)")
                 configuration = Configuration(fromJson: theData)
-                print("[CONF] app config: \(configuration!)")
+                Logger.nowPlaying.log(.DEBUG, "[CONF] app config: \(configuration!)")
+                
+                var i = 0
+                while ( i < 2000) {
+                    Logger.nowPlaying.log(.DEBUG, "i: \(i)")
+                    i += 1
+                }
             }
         }
         
@@ -55,10 +61,10 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
             
             guard let theData = data,
                 let results = theData["results"] as? [Any] else {
-                    print("Error starting App!!! \(error ?? NSError.UNKNOWN)")
+                    Logger.nowPlaying.log(.ERROR, "Error starting App!!!", error ?? NSError.UNKNOWN)
                     return
             }
-            print("[CONF] nor playing: \(theData.description)")
+            Logger.nowPlaying.log(.DEBUG, "[CONF] nor playing: \(theData.description)")
 
             for case let movieJson as [String:Any] in results {
                 
@@ -106,7 +112,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
 
             strongSelf.movies = theMovies
 
-            print("Data Loaded!!!")
+            Logger.nowPlaying.log(.DEBUG, "Data Loaded!!!")
 
             strongSelf.playingTable.isHidden = false
             strongSelf.statusLabel.isHidden = true

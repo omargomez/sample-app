@@ -61,6 +61,12 @@ class MovieDetailController: UIViewController {
 
         }
         
+        var i = 0
+        while( i < 100 ) {
+            Logger.movieDetail.log(.DEBUG, "i: \(i)")
+            i += 1
+        }
+        
     }
     
     private func loadData( completion: @escaping (MovieDetail?, Crew?) -> Void ) {
@@ -76,13 +82,13 @@ class MovieDetailController: UIViewController {
             }
             
             guard let theData = data else {
-                debugPrint(error ?? NSError.UNKNOWN)
+                Logger.movieDetail.log(.ERROR, "Movie endpoint error", error ?? NSError.UNKNOWN)
                 return
             }
             
-            debugPrint(theData)
+            Logger.movieDetail.log(.DEBUG, theData)
             detail = MovieDetail(fromJson: theData)
-            debugPrint(detail!)
+            Logger.movieDetail.log(.DEBUG, detail!)
         }
         
         group.enter()

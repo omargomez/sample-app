@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MovieDBConfig.shared.refresh()
         MovieDBGenres.shared.refresh()
         
+        Logger.shared.log(.INFO, "App didFinishLaunchingWithOptions")
+        
         return true
     }
 
@@ -49,3 +51,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension Logger {
+    
+    
+    
+    static let nowPlaying: Logger = {
+        let docURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = docURL.appendingPathComponent("logoutput.txt")
+
+        return Logger(from: Logger.shared, extendAs: .APPEND, output: LoggerFileOutputStrategy(fileURL))
+    }()
+    
+    static let movieDetail = Logger(from: Logger.shared, extendAs: .APPEND, output: LoggerHttpOutputStrategy(URL(string: "http://localhost:8000")!))
+
+}
