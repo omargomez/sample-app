@@ -44,7 +44,7 @@ class Logger {
     
     static let shared = Logger(extendAs: .REPLACE, output: LoggerConsoleOutputStrategy())
     
-    init(from parentLogger: Logger? = nil, extendAs: Extension, output: LoggerOutputStrategy, _ level: Level = .DEBUG ) {
+    init(from parentLogger: Logger? = nil, extendAs: Extension, output: LoggerOutputStrategy, _ level: Level = .INFO ) {
         self.parent = parentLogger
         self.outputStrategy = output
         self.level = level

@@ -69,6 +69,7 @@ class MovieDetailController: UIViewController {
         
     }
     
+    
     private func loadData( completion: @escaping (MovieDetail?, Crew?) -> Void ) {
         
         let group = DispatchGroup()

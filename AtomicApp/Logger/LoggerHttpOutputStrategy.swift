@@ -10,6 +10,7 @@ import Foundation
 
 class LoggerHttpOutputStrategy: LoggerOutputStrategy {
     
+    // TODO: Make this instance properties
     static let httpQueue  = DispatchQueue(label: "logger.http")
     static let resetSemaphore = DispatchSemaphore(value: 0)
     
