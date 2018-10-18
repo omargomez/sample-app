@@ -43,11 +43,11 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                 configuration = Configuration(fromJson: theData)
                 Logger.nowPlaying.log(.DEBUG, "[CONF] app config: \(configuration!)")
                 
-                var i = 0
-                while ( i < 2000) {
-                    Logger.nowPlaying.log(.DEBUG, "i: \(i)")
-                    i += 1
-                }
+//                var i = 0
+//                while ( i < 2000) {
+//                    Logger.nowPlaying.log(.DEBUG, "i: \(i)")
+//                    i += 1
+//                }
             }
         }
         

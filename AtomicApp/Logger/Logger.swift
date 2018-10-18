@@ -25,7 +25,17 @@ protocol LoggerFormatter {
 final class DefaultFormatter: LoggerFormatter {
     
     func format(_ date: Date, _ uuid: UUID, _ level: Logger.Level, _ msg: String, _ error: Error?) -> String {
-        return ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm:ss.SSS"
+        let process = ProcessInfo.processInfo
+        var threadID: UInt64 = 0
+        pthread_threadid_np(nil, &threadID)
+        var result = "\(level) \(dateFormatter.string(from: Date())) \(process.processName) [\(process.processIdentifier):\(threadID)] \"\(msg)\""
+        if let error = error {
+            result += "(\(error))"
+        }
+        
+        return result
     }
 }
 
