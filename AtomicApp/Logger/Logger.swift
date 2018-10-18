@@ -15,6 +15,20 @@ protocol LoggerOutputStrategy {
     func write(_ logLine: String)
     
 }
+
+protocol LoggerFormatter {
+    
+    func format(_ date: Date, _ uuid: UUID, _ level: Logger.Level, _ msg: String, _ error: Error?) -> String
+
+}
+
+final class DefaultFormatter: LoggerFormatter {
+    
+    func format(_ date: Date, _ uuid: UUID, _ level: Logger.Level, _ msg: String, _ error: Error?) -> String {
+        return ""
+    }
+}
+
 extension LoggerOutputStrategy {
     
     func configure(_ callback: (Error?) -> Void) {}
@@ -41,23 +55,26 @@ class Logger {
     let parent: Logger?
     let outputStrategy: LoggerOutputStrategy
     let level: Level
+    let formatter: LoggerFormatter
     
     static let shared = Logger(extendAs: .REPLACE, output: LoggerConsoleOutputStrategy())
     
-    init(from parentLogger: Logger? = nil, extendAs: Extension, output: LoggerOutputStrategy, _ level: Level = .INFO ) {
+    init(from parentLogger: Logger? = nil, extendAs: Extension, output: LoggerOutputStrategy, _ level: Level = .INFO, _ formatter: LoggerFormatter = DefaultFormatter()) {
         self.parent = parentLogger
         self.outputStrategy = output
         self.level = level
+        self.formatter = formatter
     }
     
     func log<T>(_ level: Level, _ msg: T, _ error: Error? = nil) {
         let logMoment = Date()
+        let uuid = UUID()
         DispatchQueue.global(qos: .default).async { [weak self] in
-            self?.process(logMoment, level, String(describing:msg), error)
+            self?.process(logMoment, uuid, level, String(describing:msg), error)
         }
     }
     
-    func process(_ date: Date, _ level: Level, _ msg: String, _ error: Error? = nil) {
+    func process(_ date: Date, _ uuid: UUID, _ level: Level, _ msg: String, _ error: Error? = nil) {
         if level.rawValue >= self.level.rawValue {
             
             if !self.outputStrategy.isConfigured {
@@ -68,7 +85,7 @@ class Logger {
                         logger.log(.ERROR, "Error while configuring output strategy", error)
                     } else {
                         DispatchQueue.global(qos: .default).async { [weak self] in
-                            self?.process(date, level, msg, error)
+                            self?.process(date, uuid, level, msg, error)
                         }
                     }
                     return
@@ -76,7 +93,7 @@ class Logger {
             }
             // Prefix and posfix
             // config check
-            let finalMsg = "[LOGGER] \(msg)"
+            let finalMsg = self.formatter.format(date, uuid, level, msg, error)
             self.outputStrategy.write(finalMsg)
         }
     }
