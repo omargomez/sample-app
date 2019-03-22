@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,13 +16,99 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static var configuration: Configuration?
 
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "AtomicApp")
+        container.loadPersistentStores(completionHandler: {
+            (storeDescription, error) in
+            print(storeDescription)
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let error = error as NSError
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         MovieDBConfig.shared.refresh()
         MovieDBGenres.shared.refresh()
         
+        dummy()
+        
         return true
+    }
+    
+    func dummy() {
+        let toJSON: (String) -> Any? = { str in
+            guard let data = str.data(using: .utf8) else { return nil }
+            return try? JSONSerialization.jsonObject(with: data)
+        }
+        
+        let json1 =
+"""
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,
+  "age": 27,
+  "address": {
+    "streetAddress": "21 2nd Street",
+    "city": "New York",
+    "state": "NY",
+    "postalCode": "10021-3100"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "212 555-1234"
+    },
+    {
+      "type": "office",
+      "number": "646 555-4567"
+    },
+    {
+      "type": "mobile",
+      "number": "123 456-7890"
+    }
+  ],
+  "children": [],
+  "pi": 3.1516,
+  "spouse": null
+}
+"""
+        let raw = toJSON(json1)
+        print("JSON VVV")
+        
+        let root = JSONRoot(raw)!
+        
+        let first = JSONRoot(raw)?["firstName"]?.asString
+        let alive = JSONRoot(raw)?["isAlive"]?.asBool
+        let age = JSONRoot(raw)?["age"]?.asInt
+        let state = JSONRoot(raw)?["address"]?["state"]?.asString
+        let phone1 = JSONRoot(raw)?["phoneNumbers"]?[1]?["number"]?.asString
+        let pi = root["pi"]?.asDouble
+        let piI = root["pi"]?.asInt
+        let piS = root["pi"]?.asString
+        let ageD = root["age"]?.asDouble
+        let spouse = root["spouse"]?.isNull
+        
+        
+        
+        debugPrint(raw)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

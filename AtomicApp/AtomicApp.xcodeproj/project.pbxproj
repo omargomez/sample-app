@@ -21,6 +21,10 @@
 		79A680BD20BDF23A00FFD075 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A680BC20BDF23A00FFD075 /* Entities.swift */; };
 		79CAB64820D182BB005502EC /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAB64720D182BB005502EC /* Date+Extensions.swift */; };
 		79F50FE420D9566D0019709C /* MainMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F50FE320D9566D0019709C /* MainMovieCell.swift */; };
+		F9229710221EF1420072E7F0 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F922970F221EF1420072E7F0 /* Dictionary+Extensions.swift */; };
+		F9335119221B7145002F6A60 /* AtomicApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9335117221B7145002F6A60 /* AtomicApp.xcdatamodeld */; };
+		F933511D221B74A4002F6A60 /* NowPlayingEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F933511B221B74A4002F6A60 /* NowPlayingEntity+CoreDataClass.swift */; };
+		F933511E221B74A4002F6A60 /* NowPlayingEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F933511C221B74A4002F6A60 /* NowPlayingEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		79A680BC20BDF23A00FFD075 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		79CAB64720D182BB005502EC /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		79F50FE320D9566D0019709C /* MainMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieCell.swift; sourceTree = "<group>"; };
+		F922970F221EF1420072E7F0 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		F9335118221B7145002F6A60 /* AtomicApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AtomicApp.xcdatamodel; sourceTree = "<group>"; };
+		F933511B221B74A4002F6A60 /* NowPlayingEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NowPlayingEntity+CoreDataClass.swift"; path = "CoreData/NowPlayingEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F933511C221B74A4002F6A60 /* NowPlayingEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NowPlayingEntity+CoreDataProperties.swift"; path = "CoreData/NowPlayingEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,10 @@
 		792FF4B820B5F4D200AA470C = {
 			isa = PBXGroup;
 			children = (
+				F933511B221B74A4002F6A60 /* NowPlayingEntity+CoreDataClass.swift */,
+				F933511C221B74A4002F6A60 /* NowPlayingEntity+CoreDataProperties.swift */,
+				F933511A221B7487002F6A60 /* CoreData */,
+				F9335117221B7145002F6A60 /* AtomicApp.xcdatamodeld */,
 				795AFB6E20B86E190075BD06 /* Extensions */,
 				792FF4C320B5F4D200AA470C /* AtomicApp */,
 				792FF4C220B5F4D200AA470C /* Products */,
@@ -95,8 +107,16 @@
 				795AFB6F20B86E400075BD06 /* URLSession+Extensions.swift */,
 				7900F6C320D025C00007AF38 /* NSError+Extensions.swift */,
 				79CAB64720D182BB005502EC /* Date+Extensions.swift */,
+				F922970F221EF1420072E7F0 /* Dictionary+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F933511A221B7487002F6A60 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,8 +191,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9335119221B7145002F6A60 /* AtomicApp.xcdatamodeld in Sources */,
 				79A680BD20BDF23A00FFD075 /* Entities.swift in Sources */,
+				F9229710221EF1420072E7F0 /* Dictionary+Extensions.swift in Sources */,
 				79A133B020BC39DE005C61F6 /* MovieDBGenres.swift in Sources */,
+				F933511D221B74A4002F6A60 /* NowPlayingEntity+CoreDataClass.swift in Sources */,
 				79F50FE420D9566D0019709C /* MainMovieCell.swift in Sources */,
 				79A133AE20BB5BEA005C61F6 /* MovieDBConfig.swift in Sources */,
 				79A680BB20BDF05B00FFD075 /* MovieDetailController.swift in Sources */,
@@ -181,6 +204,7 @@
 				792FF4C520B5F4D200AA470C /* AppDelegate.swift in Sources */,
 				795AFB7220B86E8B0075BD06 /* EndPoints.swift in Sources */,
 				7900F6C420D025C00007AF38 /* NSError+Extensions.swift in Sources */,
+				F933511E221B74A4002F6A60 /* NowPlayingEntity+CoreDataProperties.swift in Sources */,
 				795AFB7020B86E400075BD06 /* URLSession+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +388,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F9335117221B7145002F6A60 /* AtomicApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F9335118221B7145002F6A60 /* AtomicApp.xcdatamodel */,
+			);
+			currentVersion = F9335118221B7145002F6A60 /* AtomicApp.xcdatamodel */;
+			path = AtomicApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 792FF4B920B5F4D200AA470C /* Project object */;
 }
