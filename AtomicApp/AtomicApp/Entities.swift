@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie {
+struct Movie: Hashable {
     
     var genreIds: [Int]
     var posterPath: String
@@ -37,6 +37,9 @@ struct Movie {
         
     }
     
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
+    }
 }
 
 struct MovieDetail {

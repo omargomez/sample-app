@@ -13,7 +13,6 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var playingTable: UITableView!
     @IBOutlet weak var statusLabel: UILabel!
     var movies: [Movie] = []
-    var config: Configuration!
     static let placeholderImage = UIImage(named: "movieLogo")!
     
     override func viewDidLoad() {
@@ -21,63 +20,6 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
-    private func loadData(loadConfig: Bool, completion: @escaping (Configuration?, [Movie]?) -> Void ) {
-        
-        let group = DispatchGroup()
-        
-        var configuration: Configuration?
-        if loadConfig {
-            group.enter()
-            URLSession.shared.doJsonTask(forURL: EndPoint.configuration.url) { (data, error) in
-                
-                defer {
-                    group.leave()
-                }
-                
-                guard let theData = data else {
-                    Logger.shared.log( .ERROR, "Error starting App!!!", error ?? NSError.UNKNOWN )
-                    return
-                }
-                
-                Logger.shared.log(.DEBUG, "[CONF] config: \(theData.description)")
-                configuration = Configuration(fromJson: theData)
-                Logger.shared.log(.DEBUG, "[CONF] app config: \(configuration!)")
-            }
-        }
-        
-        group.enter()
-        var movies: [Movie]?
-        URLSession.shared.doJsonTask(forURL: EndPoint.nowPlaying.url) { (data, error) in
-            movies = []
-            defer {
-                group.leave()
-            }
-            
-            guard let theData = data,
-                let results = theData["results"] as? [Any] else {
-                    Logger.shared.log(.ERROR, "Error starting App!!!", error ?? NSError.UNKNOWN)
-                    return
-            }
-            Logger.shared.log(.DEBUG, "[CONF] now playing: \(theData.description)")
-
-            for case let movieJson as [String:Any] in results {
-                
-                guard let movie = Movie(fromJson: movieJson) else {
-                    return
-                }
-                
-                movies?.append(movie)
-            }
-            
-        }
-
-        group.notify(queue: .main) {
-            
-            completion(configuration, movies)
-        }
-
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -91,13 +33,12 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
                 return
             }
             
-            if AppDelegate.configuration == nil {
-                guard let theConfiguration = configuration else {
-                    return
-                }
-
-                AppDelegate.configuration = theConfiguration
-                strongSelf.config = theConfiguration
+            guard AppDelegate.configuration != nil || configuration != nil else {
+                fatalError("No Configuration!!!")
+            }
+            
+            if configuration != nil {
+                AppDelegate.configuration = configuration
             }
 
             guard let theMovies = movies else {
@@ -150,7 +91,7 @@ class NowPlayingController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.textLabel?.text = movie.title
         cell.imageView?.image = NowPlayingController.placeholderImage
 
-        let imageEndPoint = EndPoint.image(basePath: self.config.images.secureBaseUrl, size: self.config.images.defaultLogoSize, imageName: movie.posterPath)
+        let imageEndPoint = EndPoint.image(basePath: AppDelegate.configuration!.images.secureBaseUrl, size: AppDelegate.configuration!.images.defaultLogoSize, imageName: movie.posterPath)
         cell.scheduleImageLoading(fromURL: imageEndPoint.url)
         
         return cell

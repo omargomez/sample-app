@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension Logger {
     
     func appDefaultLevel() -> Logger.Level {
-        return .INFO
+        return .DEBUG
     }
     
     func prefix(_ level: Logger.Level) -> String {
